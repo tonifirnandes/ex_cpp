@@ -1,0 +1,88 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+
+using namespace std;
+
+int recursiveBinarySearch(int* numberList, int leftIndex, int rightIndex, int lookupNumber) {
+    
+    if(rightIndex >= leftIndex) {
+        
+        int midIndex = leftIndex + (rightIndex - leftIndex)/2;
+        
+        //we found it
+        if(numberList[midIndex] == lookupNumber) {
+            return midIndex;
+        } else if(numberList[midIndex] > lookupNumber) {
+            //ignore other right side, then keep looking to the left
+            return recursiveBinarySearch(numberList, leftIndex, midIndex-1, lookupNumber);
+        } else {
+            //ignore other left side, then keep looking to the right
+            return recursiveBinarySearch(numberList, midIndex+1, rightIndex, lookupNumber);
+        }
+    }
+    
+    //we didn't find it
+    return -1;
+}
+
+int loopBinarySearch(int* numberList, int leftIndex, int rightIndex, int lookupNumber) {
+    
+    while(rightIndex >= leftIndex) {
+        
+        int midIndex = leftIndex + (rightIndex - leftIndex)/2;
+        
+        //we found it
+        if(numberList[midIndex] == lookupNumber) {
+            return midIndex;
+        } else if(numberList[midIndex] > lookupNumber) {
+            //ignore other right side, then keep looking to the left
+            rightIndex = midIndex - 1;
+        } else {
+            //ignore other left side, then keep looking to the right
+            leftIndex = midIndex + 1;
+        }
+    }
+    
+    //we didn't find it
+    return -1;
+}
+
+int main()
+{
+    int lookupNumber = 100;
+    int numberList[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,
+                        20, 80, 30, 60, 50, 110, 100, 130, 170, 180, 190, 200};
+    //because sizeof return total of bytes number
+    int arrayLength = sizeof(numberList)/sizeof(numberList[0]); 
+    int foundIndex = -1;
+    
+    //A. Linear search, obviously we just through all elements in the given array
+    // for(int i = 0; i < arrayLength; i++) {
+    //     if(numberList[i] == lookupNumber) {
+    //         foundIndex = i;
+    //         break;
+    //     }
+    // }
+    
+    //B. Binary search
+    //this only for given sorted array
+    //B.1 recursive binary search
+    //foundIndex = recursiveBinarySearch(numberList, 0, arrayLength-1, lookupNumber);
+    //B.2 loop binary search
+    //foundIndex = loopBinarySearch(numberList, 0, arrayLength-1, lookupNumber);
+    
+    if(foundIndex != -1) {
+        cout << "The number: " << lookupNumber << " was found at index: " <<foundIndex;
+    } else {
+        cout << "The number: " << lookupNumber << " was not found";
+    }
+    
+    return true;
+}
