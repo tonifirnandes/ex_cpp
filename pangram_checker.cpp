@@ -16,7 +16,8 @@ int main()
     string pangramTarget = "abcdefghijklmnopqrstuvwxyy"; //"abcdefghijklmnopqrstuvwxyz";
     cout << "Is this string : " << pangramTarget <<  " a pangram ?" << endl;
     
-    bool pangramMark[26];
+    const int numOfAlphabet = 26;
+    bool pangramMark[numOfAlphabet];
     int pangramCharIndex;
     
     //Steps:
@@ -35,7 +36,7 @@ int main()
     }
     
     //b. simply loop again through marked and break after there is one of character in alphabet not exist
-    for(int i = 0; i < 26; i++){
+    for(int i = 0; i < numOfAlphabet; i++){
         if(pangramMark[i] == false) {
             cout << "No, It's Not a Pangram";
             return false;
