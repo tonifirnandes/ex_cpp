@@ -23,6 +23,14 @@ int main()
     int z = 4;
     int zOld = z;
     
+    //Using temp variable
+    //int temp;
+    //temp = w;
+    //w = x;
+    //x = y;
+    //y = z;
+    //z = temp;
+    
     //Using arithmatic solutions
     //Steps: 
     //a. find total of all number
